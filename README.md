@@ -19,6 +19,20 @@
     "password": "Aa!12345"
 }
 
+## Upload Post
+{
+    "title": "Laws of Thermo Dynamics",
+    "content": "By Sheldon Cooper",
+    "category": "Blog",
+    "tags": ["education", "science"],
+    "date": "2024-03-20"
+}
+
+## Upload Comment
+{
+    "comment" : "This is an encouraging comment"
+}
+
 ## Generate JWT Secret Key
 - node -e "console.log(require('crypto').randomBytes(32).toString('hex'));"
 
@@ -36,21 +50,22 @@
 ### User Routes:
     - GET /api/users: Get a list of all users. ---DONE
     - GET /api/users/:id: Get a specific user by ID. ---DONE
-    - PUT /api/users/:id: Update a user's information.
-    - DELETE /api/users/:id: Delete a user.
+    - PUT /api/users/:id: Update a user's information. --- DONE
+    - DELETE /api/users/: Delete a user. --- DONE
 
 ### Post Routes:
-    - GET /api/posts: Get a list of all posts.
-    - GET /api/posts/:id: Get a specific post by ID.
-    - POST /api/posts: Create a new post.
-    - PUT /api/posts/:id: Update a post.
-    - DELETE /api/posts/:id: Delete a post.
+    - GET /api/posts: Get a list of all posts. --- DONE
+    - GET /api/posts/:id: Get a specific post by ID. --- DONE
+    - POST /api/posts: Create a new post. --- DONE
+    - PUT /api/posts/:id: Update a post. --- DONE
+    - DELETE /api/posts/:id: Delete a post. --- DONE
 
 ### Comment Routes:
-    - GET /api/posts/:postId/comments: Get all comments for a specific post.
-    - POST /api/posts/:postId/comments: Add a new comment to a post.
+    - GET /api/posts/:postId/comments: Get all comments for a specific post. --- DONE
+    - POST /api/posts/:postId/comments: Add a new comment to a post. --- DONE
     - PUT /api/posts/:postId/comments/:commentId: Update a comment.
-    - DELETE /api/posts/:postId/comments/:commentId: Delete a comment.
+    - DELETE /api/posts/:postId/comments/:commentId: User can delete their own comments.
+    - DELETE /api/posts/:postId/comments/:commentId: Creator can delete comments of anyone on their posts.
 
 ### Like/Dislike Routes:
     - POST /api/posts/:postId/like: Like a post.

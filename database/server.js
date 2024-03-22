@@ -36,11 +36,11 @@ sequelize
 
 const db = require("../models");
 db.sequelize
-    .sync()
+    .sync({ force: false })
     .then(() => {
         console.log(clc.green("****************"));
         console.log(clc.green("Models created Successfully"));
-        console.log(clc.green("****************\n"));
+        console.log(clc.green("****************"));
     })
     .catch(err => {
         console.log(clc.red("################"));

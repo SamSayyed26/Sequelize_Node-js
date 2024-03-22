@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const { sequelize, DataTypes } = require('../database/server');
-const UserModel = require("../models/users")(sequelize, DataTypes);
+const UserModel = require("../models/Users")(sequelize, DataTypes);
 const bcrypt = require("bcrypt");
 
 /* Add Users. */
 router.post('/', async function (req, res, next) {
   const userObj = req.body;
-  console.log("OBJ: ", userObj);
+  // console.log("OBJ: ", userObj);
 
   UserModel.checkUnique(userObj.email)
     .then(userFound => {
@@ -19,6 +19,7 @@ router.post('/', async function (req, res, next) {
         bcrypt.hash(userObj.password, 10)
           .then(pass => {
             userObj.password = pass;
+            userObj['isContentCreator'] = false
             // Adding User
             UserModel.addUser(userObj)
               .then((user) => {
@@ -30,7 +31,8 @@ router.post('/', async function (req, res, next) {
               })
           })
           .catch(err => {
-            console.log("Error while hashing the password =>", err)
+            console.log("Error while hashing the password =>", err);
+            res.json({ error: "Something went wrong while creating the user" })
           });
       }
     })

@@ -1,6 +1,4 @@
 const { Sequelize, DataTypes } = require("sequelize");
-// const models = require("../models").models;
-const Posts = require("../models/posts.js")
 
 module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define('Users', {
@@ -25,11 +23,17 @@ module.exports = (sequelize, Sequelize) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    isContentCreator: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   });
 
   User.associate = (models) => {
     User.hasMany(models.Posts, { foreignKey: 'userId' });
+    User.hasMany(models.Comments, { foreignKey: 'userId' });
+    User.hasMany(models.Likes, { foreignKey: 'userId' })
   };
   Object.assign(User, require("../model_methods/model_methods.js"))
   return User;

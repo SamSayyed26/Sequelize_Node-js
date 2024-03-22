@@ -10,6 +10,7 @@ module.exports = {
         lastName: "Sayyed",
         email: "sumayyah.sayyed@focusteck.com",
         password: "$2b$10$wUXURI9RcQpdAVXFHIcjt.PcQlsjTGMLg5XCJ8PYL12yu5Ia71JoC",
+        isContentCreator: true,
         createdAt: "2024-03-20T05:38:36.197Z",
         updatedAt: "2024-03-20T05:38:36.197Z"
       },
@@ -19,6 +20,7 @@ module.exports = {
         lastName: "Tariq",
         email: "atifa.tariq@focusteck.com",
         password: "$2b$10$TFTxIFSLGECvhyw6ch1g9OMuLpHAPiHxf3CoZW5sMTj9zGNzUJLli",
+        isContentCreator: false,
         createdAt: "2024-03-20T05:40:59.365Z",
         updatedAt: "2024-03-20T05:40:59.365Z"
       },
@@ -28,6 +30,7 @@ module.exports = {
         lastName: "Hassan",
         email: "ali.hassan@focusteck.com",
         password: "$2b$10$JU2xXKHrAyu1S8tCUWgF6eV1zrOgfsRw5Ba4mNRkYPr1NXBlwwAci",
+        isContentCreator: false,
         createdAt: "2024-03-20T05:42:05.552Z",
         updatedAt: "2024-03-20T05:42:05.552Z"
       },
@@ -37,6 +40,7 @@ module.exports = {
         lastName: "Hassan",
         email: "ali.hassan+1@focusteck.com",
         password: "$2b$10$LS9HtO3P5KnE5yAZeQGWB.AhlAUs7vKP53Lq9Mgy\/.b2RN0XSEdPu",
+        isContentCreator: false,
         createdAt: "2024-03-20T05:46:53.891Z",
         updatedAt: "2024-03-20T05:46:53.891Z"
       },
@@ -46,6 +50,7 @@ module.exports = {
         lastName: "Rafaqat",
         email: "zainab.rafaqat@focusteck.com",
         password: "$2b$10$K1EP.GAz\/gzUIktHqhXuWeL3SgBZtDa0E.WyFwdQD05\/JFcEPV.IO",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:25:19.912Z",
         updatedAt: "2024-03-20T08:25:19.912Z"
       },
@@ -55,6 +60,7 @@ module.exports = {
         lastName: "Tariq",
         email: "umair.tariq@focusteck.com",
         password: "$2b$10$mc\/gjsQabSuTDzEQYzC6YOwJMhHneJk0vimEeiGk\/OaBTCBFNuCEq",
+        isContentCreator: true,
         createdAt: "2024-03-20T08:25:38.624Z",
         updatedAt: "2024-03-20T08:25:38.624Z"
       },
@@ -64,6 +70,7 @@ module.exports = {
         lastName: "Safdar",
         email: "Usama.safdar@focusteck.com",
         password: "$2b$10$Htko3INHEiVe3oRzLbyGJu5w4UQ1eV1h\/KEWVe1TZ5v6tmgpsM.iq",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:25:57.533Z",
         updatedAt: "2024-03-20T08:25:57.533Z"
       },
@@ -73,6 +80,7 @@ module.exports = {
         lastName: "Chughtai",
         email: "rehman.chughtai@focusteck.com",
         password: "$2b$10$33KCuFtg\/Cs\/froxJe1he.3W3veoLizkEii8J4uf2xytjGk7PGYxG",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:26:49.033Z",
         updatedAt: "2024-03-20T08:26:49.033Z"
       },
@@ -82,6 +90,7 @@ module.exports = {
         lastName: "Ali",
         email: "arooba.ali@focusteck.com",
         password: "$2b$10$HycBxgCTeFZgpa8HFWOjN.8mJPt0PWwe4WERIu64TW4ueyUZ9yfIG",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:27:13.790Z",
         updatedAt: "2024-03-20T08:27:13.790Z"
       },
@@ -91,6 +100,7 @@ module.exports = {
         lastName: "Saleem",
         email: "muhammad.saleem@focusteck.com",
         password: "$2b$10$iSqhcB49S3IPfNRlZie2P.EQwy.dB6Q4t5nDmBO2R0O0Xxldamg9G",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:28:13.010Z",
         updatedAt: "2024-03-20T08:28:13.010Z"
       },
@@ -100,6 +110,7 @@ module.exports = {
         lastName: "Ali",
         email: "arsalan.ali@focusteck.com",
         password: "$2b$10$rGiP2uxRPxpPj8GcFTj7LOpnKz7AFsvNiCMcX3fBAaZ7a2TBZ9ZRO",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:29:41.712Z",
         updatedAt: "2024-03-20T08:29:41.712Z"
       },
@@ -109,6 +120,7 @@ module.exports = {
         lastName: "Idrees",
         email: "ahad.idress@focusteck.com",
         password: "$2b$10$Dag83FkqBIrEvL2QUNzOhOGV9BwNwGiV\/\/9uiZFEykFiI2OshPDqC",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:30:51.966Z",
         updatedAt: "2024-03-20T08:30:51.966Z"
       },
@@ -118,6 +130,7 @@ module.exports = {
         lastName: "Zeeshan",
         email: "muhammad.zeeshan@focusteck.com",
         password: "$2b$10$IvpkGTmAKK6w78F1an56iebXliQZLo2W13Jas\/cyZZFN6lhubfGdy",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:31:08.638Z",
         updatedAt: "2024-03-20T08:31:08.638Z"
       },
@@ -127,6 +140,7 @@ module.exports = {
         lastName: "Ahmad",
         email: "bilal.ahmad@focusteck.com",
         password: "$2b$10$rDGETogPgmNXkHRlbp58LOtVmbhO8.GBfk6BVj5n0Dxah7BvMGrT2",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:31:31.959Z",
         updatedAt: "2024-03-20T08:31:31.959Z"
       },
@@ -136,6 +150,7 @@ module.exports = {
         lastName: "Umar",
         email: "muhammad.umar@focusteck.com",
         password: "$2b$10$riclYfr07ClCDKWDgDQq\/OdTtl4y\/u2KGcbg4tgfNnL0tYllbuEMK",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:32:09.796Z",
         updatedAt: "2024-03-20T08:32:09.796Z"
       },
@@ -145,6 +160,7 @@ module.exports = {
         lastName: "Asad",
         email: "saad.asad@focusteck.com",
         password: "$2b$10$MEEfwZ2ZCqP2nb.HiW73z.T45pnKOTwt6RZOtFxX9PQVeCd8WzghS",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:32:24.843Z",
         updatedAt: "2024-03-20T08:32:24.843Z"
       },
@@ -154,6 +170,7 @@ module.exports = {
         lastName: "Idrees",
         email: "ahad.idrees@focusteck.com",
         password: "$2b$10$HxNGbJpaGmhvPwz..evXT.sm8PclfhDhxH0ZONgLTV9dAp\/RI9pMm",
+        isContentCreator: false,
         createdAt: "2024-03-20T08:32:38.774Z",
         updatedAt: "2024-03-20T08:32:38.774Z"
       }

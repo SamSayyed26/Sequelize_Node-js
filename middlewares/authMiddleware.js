@@ -12,7 +12,7 @@ function verifyToken(req, res, next) {
         const parts = bearerToken.split(' ');
         const token = parts[1];
         const decoded = jwt.verify(token, JWT_SECRET_KEY);
-        res.locals.authenticatedUser = decoded.userEmail
+        res.locals.authenticatedUser = decoded.userId
         next();
     } catch (error) {
         res.json({ message: "Invalid Token" });

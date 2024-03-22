@@ -4,12 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/createUsers');
-var findUserRouter = require('./routes/findUser');
-var login = require("./routes/login");
-var allUsers = require("./routes/allUsers");
-var protectedProfile = require("./routes/protectedProfile");
+var index = require('./controllers/index');
+var signup = require('./controllers/signup');
+var users = require('./controllers/users');
+var login = require("./controllers/login");
+var posts = require("./controllers/posts");
+var comments = require("./controllers/comments");
 
 var app = express();
 
@@ -23,13 +23,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/signup', usersRouter);
+app.use('/', index);
+app.use('/signup', signup);
 app.use('/login', login);
-app.use('/profile', protectedProfile);
-app.use('/user', findUserRouter);
-app.use("/users", allUsers);
-app.use('/post', protectedProfile);
+app.use('/users', users);
+app.use('/posts', posts);
+app.use('/comments', comments);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

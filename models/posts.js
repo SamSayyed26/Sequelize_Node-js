@@ -1,14 +1,16 @@
-const { Sequelize, DataTypes } = require("sequelize");
-// const models = require("../models").models;
-const Users = require("../models/users.js")
+const { Sequelize, DataTypes } = require('sequelize');
 
 module.exports = (sequelize, Sequelize) => {
-    const Posts = sequelize.define('Posts', {
+    const Post = sequelize.define('Posts', {
         id: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
             allowNull: false,
             primaryKey: true
+        },
+        userId: {
+            type: Sequelize.UUID,
+            allowNull: false,
         },
         title: {
             type: DataTypes.STRING,
@@ -22,20 +24,22 @@ module.exports = (sequelize, Sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        tags: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            // type: DataTypes.STRING,
-            allowNull: false
-        },
         date: {
             type: DataTypes.DATEONLY,
             allowNull: false
         }
     });
 
-    Posts.associate = (models) => {
-        Posts.belongsTo(models.Users);
+
+    Post.associate = (models) => {
+        Post.belongsTo(models.Users, { foreignKey: 'userId' });
+        Post.hasMany(models.Comments, { foreignKey: 'postId' });
+        Post.belongsToMany(models.Tags, { foreignKey: 'postId', through: 'postTags' });
+        Post.hasMany(models.Likes, { foreignKey: 'postId' });
     };
-    Object.assign(Posts, require("../model_methods/model_methods.js"))
-    return Posts;
+
+    // Post.prototype.addTag = BelongsToManyAddAssociationMixin;
+
+    Object.assign(Post, require("../model_methods/model_methods.js"))
+    return Post;
 }
