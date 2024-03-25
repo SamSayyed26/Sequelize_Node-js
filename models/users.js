@@ -33,7 +33,7 @@ module.exports = (sequelize, Sequelize) => {
   User.associate = (models) => {
     User.hasMany(models.Posts, { foreignKey: 'userId' });
     User.hasMany(models.Comments, { foreignKey: 'userId' });
-    User.hasMany(models.Likes, { foreignKey: 'userId' })
+    User.hasMany(models.Reactions, { foreignKey: 'userId' });
   };
   Object.assign(User, require("../model_methods/model_methods.js"))
   return User;

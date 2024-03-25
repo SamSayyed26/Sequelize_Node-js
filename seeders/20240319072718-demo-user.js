@@ -30,7 +30,7 @@ module.exports = {
         lastName: "Hassan",
         email: "ali.hassan@focusteck.com",
         password: "$2b$10$JU2xXKHrAyu1S8tCUWgF6eV1zrOgfsRw5Ba4mNRkYPr1NXBlwwAci",
-        isContentCreator: false,
+        isContentCreator: true,
         createdAt: "2024-03-20T05:42:05.552Z",
         updatedAt: "2024-03-20T05:42:05.552Z"
       },

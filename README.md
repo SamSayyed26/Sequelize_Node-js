@@ -3,6 +3,7 @@
 ## Seeders
 - To create a seeder - npx sequelize-cli seed:generate --name demo-user
 - To run a seeder - npx sequelize-cli db:seed:all
+- To run seeder for a signle file - npx sequelize-cli db:seed --seed my_seeder_file.js
 
 
 ## Create User
@@ -15,7 +16,7 @@
 
 ## Login User
 {
-    "email": "ali.hassan+1@focusteck.com",
+    "email": "sumayyah.sayyed@focusteck.com",
     "password": "Aa!12345"
 }
 
@@ -63,9 +64,9 @@
 ### Comment Routes:
     - GET /api/posts/:postId/comments: Get all comments for a specific post. --- DONE
     - POST /api/posts/:postId/comments: Add a new comment to a post. --- DONE
-    - PUT /api/posts/:postId/comments/:commentId: Update a comment.
-    - DELETE /api/posts/:postId/comments/:commentId: User can delete their own comments.
-    - DELETE /api/posts/:postId/comments/:commentId: Creator can delete comments of anyone on their posts.
+    - PUT /api/posts/:postId/comments/:commentId: Update a comment. --- DONE
+    - DELETE /api/posts/:postId/comments/:commentId: User can delete their own comments. --- DONE
+    - DELETE /api/posts/:postId/comments/:commentId: Creator can delete comments of anyone on their posts. --- DONE
 
 ### Like/Dislike Routes:
     - POST /api/posts/:postId/like: Like a post.

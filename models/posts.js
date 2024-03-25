@@ -35,7 +35,7 @@ module.exports = (sequelize, Sequelize) => {
         Post.belongsTo(models.Users, { foreignKey: 'userId' });
         Post.hasMany(models.Comments, { foreignKey: 'postId' });
         Post.belongsToMany(models.Tags, { foreignKey: 'postId', through: 'postTags' });
-        Post.hasMany(models.Likes, { foreignKey: 'postId' });
+        Post.hasMany(models.Reactions, { foreignKey: 'postId' });
     };
 
     // Post.prototype.addTag = BelongsToManyAddAssociationMixin;

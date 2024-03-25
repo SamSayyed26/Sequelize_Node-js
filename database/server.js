@@ -21,9 +21,7 @@ sequelize
     .authenticate()
     .then(() => {
         console.log(clc.green("\n****************"));
-        // console.log("Dir name", path.join(path.join(__dirname, 'models'), 'users'))
-
-        console.log(clc.green("Connection Established Successfully"));
+        console.log(clc.green(`Connection with DB ${dbName} Established Successfully`));
         console.log(clc.green("****************\n"));
     })
     .catch(err => {

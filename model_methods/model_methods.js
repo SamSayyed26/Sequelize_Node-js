@@ -1,7 +1,7 @@
-// const postTags = require("../postTags");
-// const { BelongsToManyAddAssociationMixin } = require('../models/Users');
-module.exports = {
+// const { sequelize, DataTypes } = require('../database/server');
+// const UsersModel = require("../models/Users")(sequelize, DataTypes);
 
+module.exports = {
     // User Methods
     async addUser(userObj) {
         let user = await this.create(userObj)
@@ -41,12 +41,12 @@ module.exports = {
         return users;
     },
 
-    getUserId(email) {
+    getUserById(id) {
         let user = this.findOne({
             where: {
-                email: email
+                id: id
             },
-            attributes: ['id']
+            attributes: ['id', 'isContentCreator']
         })
         return user;
     },
@@ -130,8 +130,17 @@ module.exports = {
         return posts;
     },
 
+    async getPostByID(postID, userID) {
+        let post = await this.findOne({
+            where: {
+                id: postID,
+                userId: userID
+            }
+        })
+        return post;
+    },
+
     async editPost(userID, postObj, postID) {
-        // console.log("post Obj: ", postObj)
         let post = await this.update(
             {
                 title: postObj.title,
@@ -159,6 +168,7 @@ module.exports = {
     },
 
     /* ------------------------------------------------------ */
+    // Comments Methods
 
     // Upload Comment
     async uploadComment(commentObj) {
@@ -173,5 +183,55 @@ module.exports = {
             }
         })
         return comments;
-    }
+    },
+
+    async updateComment(commentObj, commentId) {
+        let comment = await this.update(
+            {
+                comment: commentObj.comment
+            },
+            {
+                where: {
+                    id: commentId
+                }
+            }
+        );
+        return comment;
+    },
+
+    async findCommentByID(commentID, userID) {
+        // console.log("UsersModel: ", UsersModel)
+        // console.log("Model: ", models);
+
+        let comment = await this.findOne({
+            where: {
+                id: commentID,
+                userId: userID
+            },
+            // include: [{
+            //     model: UsersModel,
+            //     as: 'user'
+            // }]
+        });
+        return comment;
+    },
+
+    async deleteComment(commentID) {
+        let comment = await this.destroy({
+            where: {
+                id: commentID
+            }
+        });
+        return comment;
+    },
+
+    async matchPostIDInComment(postID, commentID) {
+        let comment = await this.findOne({
+            where: {
+                id: commentID,
+                postId: postID
+            }
+        });
+        return comment;
+    },
 }

@@ -10,21 +10,9 @@ module.exports = {
         title: "SUVs in Pakistan",
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat lacus laoreet non curabitur gravida arcu ac.",
         category: "Blog",
-        // tags: "cool",
         date: "2024-03-20",
         createdAt: "2024-03-21T06:26:47.395Z",
         updatedAt: "2024-03-21T06:26:47.395Z"
-      },
-      {
-        id: "e33da82f-2de5-4dff-96d8-e2d15edb8993",
-        userId: "672d2d0d-643f-4acc-b38c-79f8b1ab2ca6",
-        title: "SUVs in Pakistan",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat lacus laoreet non curabitur gravida arcu ac.",
-        category: "Blog",
-        // tags: "cool",
-        date: "2024-03-20",
-        createdAt: "2024-03-21T06:26:55.055Z",
-        updatedAt: "2024-03-21T06:26:55.055Z"
       },
       {
         id: "51c7040b-d43f-4283-9a8d-03f75bf69611",
@@ -32,7 +20,6 @@ module.exports = {
         title: "How To Become Rich",
         content: "Study smart!!!!",
         category: "Blog",
-        // tags: "education",
         date: "2024-03-20",
         createdAt: "2024-03-21T07:16:50.029Z",
         updatedAt: "2024-03-21T07:16:50.029Z"
@@ -43,7 +30,6 @@ module.exports = {
         title: "President Of The United Stated",
         content: "Joe Biden",
         category: "Blog",
-        // tags: "politics",
         date: "2024-03-20",
         createdAt: "2024-03-21T07:18:09.214Z",
         updatedAt: "2024-03-21T07:18:09.214Z"
@@ -51,24 +37,62 @@ module.exports = {
       {
         id: "1fcdd99f-ccf2-4674-aa23-f26657914536",
         userId: "ccccb1af-6dbf-4918-9c1e-74bfc68b8eff",
-        title: "How to buy Bitcoin",
-        content: "Hva emoney to invest",
+        title: "Laws of Thermodynamics",
+        content: "Sheldon LI Cooper",
         category: "Blog",
-        // tags: "sarcasm",
         date: "2024-03-20",
         createdAt: "2024-03-21T07:24:06.944Z",
-        updatedAt: "2024-03-21T07:24:06.944Z"
+        updatedAt: "2024-03-22T10:48:16.413Z"
       },
       {
         id: "5398e008-697d-485e-b0d9-9d51c7a2e69f",
         userId: "ccccb1af-6dbf-4918-9c1e-74bfc68b8eff",
-        title: "How not to be rude",
-        content: "Shut your mouth",
+        title: "Laws of Thermodynamics",
+        content: "Sheldon LI Cooper",
         category: "Blog",
-        // tags: "sarcasm",
         date: "2024-03-20",
         createdAt: "2024-03-21T07:24:32.191Z",
-        updatedAt: "2024-03-21T07:24:32.191Z"
+        updatedAt: "2024-03-22T10:48:16.413Z"
+      },
+      {
+        id: "b70990aa-3dc9-4926-9491-e6dbba9d6ae9",
+        userId: "ccccb1af-6dbf-4918-9c1e-74bfc68b8eff",
+        title: "Laws of Thermodynamics",
+        content: "Sheldon LI Cooper",
+        category: "Blog",
+        date: "2024-03-20",
+        createdAt: "2024-03-22T10:29:08.624Z",
+        updatedAt: "2024-03-22T10:48:16.413Z"
+      },
+      {
+        id: "84524195-03ed-4da8-bcd4-49464b82cda2",
+        userId: "672d2d0d-643f-4acc-b38c-79f8b1ab2ca6",
+        title: "Laws of Quantum Mechanics",
+        content: "By Einstein",
+        category: "Blog",
+        date: "2024-03-20",
+        createdAt: "2024-03-25T07:09:04.771Z",
+        updatedAt: "2024-03-25T07:09:04.771Z"
+      },
+      {
+        id: "e33da82f-2de5-4dff-96d8-e2d15edb8993",
+        userId: "672d2d0d-643f-4acc-b38c-79f8b1ab2ca6",
+        title: "Laws of Entropy",
+        content: "Chnage in heat. Every thing moves to destruction",
+        category: "Blog",
+        date: "2024-03-20",
+        createdAt: "2024-03-21T06:26:55.055Z",
+        updatedAt: "2024-03-25T07:15:38.378Z"
+      },
+      {
+        id: "2ed0d3fa-bcc2-47c5-a816-3123274bafd9",
+        userId: "09998a53-4bce-4003-a007-d83a49303a3b",
+        title: "How to be a chupa rustam",
+        content: "Follow me",
+        category: "Blog",
+        date: "2024-03-20",
+        createdAt: "2024-03-25T07:40:58.521Z",
+        updatedAt: "2024-03-25T07:40:58.521Z"
       }
     ])
   },

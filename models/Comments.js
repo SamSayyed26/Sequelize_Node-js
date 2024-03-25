@@ -11,11 +11,19 @@ module.exports = (sequelize, Sequelize) => {
         },
         userId: {
             type: Sequelize.UUID,
-            allowNull: false
+            allowNull: false,
+            // references: {
+            //     model: "Users",
+            //     key: 'id'
+            // }
         },
         postId: {
             type: Sequelize.UUID,
-            allowNull: false
+            allowNull: false,
+            // references: {
+            //     model: "Posts",
+            //     key: 'id'
+            // }
         },
         comment: {
             type: DataTypes.STRING,

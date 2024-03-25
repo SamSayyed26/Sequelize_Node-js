@@ -4,10 +4,11 @@ const verifyToken = require("../middlewares/authMiddleware");
 const { sequelize, DataTypes } = require('../database/server');
 const CommentsModel = require("../models/Comments")(sequelize, DataTypes);
 const UsersModel = require("../models/Users")(sequelize, DataTypes);
+const PostsModel = require("../models/Posts")(sequelize, DataTypes);
 
 
-// Add a COMMENT
-router.post("/", verifyToken, (req, res, next) => {
+/* ADD COMMENT */
+router.post("/comments/", verifyToken, (req, res, next) => {
     const commentObj = req.body;
     const postId = req.query.id;
     if (res.locals.authenticatedUser) {
@@ -26,8 +27,102 @@ router.post("/", verifyToken, (req, res, next) => {
     }
 });
 
+/* UPDATE COMMENT OF USER/CONSUMER */
+router.put("comments//:id", verifyToken, (req, res, next) => {
+    const commentObj = req.body;
+    const commentId = req.params.id;
+
+    if (res.locals.authenticatedUser) {
+        const userID = res.locals.authenticatedUser;
+
+        CommentsModel.findCommentByID(commentId, userID)
+            .then(comment => {
+                if (comment) {
+                    CommentsModel.updateComment(commentObj, comment.id)
+                        .then(comment => {
+                            res.json({ message: "Comment updated successfully" });
+                        })
+                        .catch((err => {
+                            console.error("Err => ", err);
+                            res.json({ error: "Error while updating the comment" });
+                        }))
+                } else {
+                    res.json({ error: "You are not the author of this comment" });
+                }
+            })
+            .catch(err => {
+                console.error("Err => ", err);
+                res.json({ error: "Comment not found" });
+            })
+    }
+});
+
+/* DELETE COMMENT OF USER/CONSUMER */
+router.delete("/:postId/comments/:commentId", verifyToken, (req, res, next) => {
+    const commentID = req.params.commentId;
+    const postID = req.params.postId;
+
+    if (res.locals.authenticatedUser) {
+        const userID = res.locals.authenticatedUser;
+
+        UsersModel.getUserById(userID)
+            .then(user => {
+                console.log("USer: ", user)
+                if (user.isContentCreator) {
+                    PostsModel.getPostByID(postID, userID)
+                        .then(post => {
+                            if (post) {
+                                CommentsModel.matchPostIDInComment(postID, commentID)
+                                    .then(comment => {
+                                        CommentsModel.deleteComment(comment.id)
+                                            .then(comment => {
+                                                res.json({ message: "Comment deleted successfully" });
+                                            })
+                                            .catch((err => {
+                                                console.error("Err => ", err);
+                                                res.json({ error: "Error while deleting the comment" });
+                                            }))
+                                    })
+                                    .catch(err => {
+                                        console.error("Err => ", err);
+                                        res.json({ error: "Unable to find the comment" });
+                                    })
+                            }
+                            else {
+                                res.json({ error: "This comment is not on this post" })
+                            }
+                        })
+                }
+                else {
+                    CommentsModel.findCommentByID(commentID, userID)
+                        .then(comment => {
+                            if (comment) {
+                                console.log("Comment: ", comment);
+                                CommentsModel.deleteComment(comment.id)
+                                    .then(comment => {
+                                        res.json({ message: "Comment deleted successfully" });
+                                    })
+                                    .catch((err => {
+                                        console.error("Err => ", err);
+                                        res.json({ error: "Error while deleting the comment" });
+                                    }))
+                            } else {
+                                res.json({ error: "Comment not found" });
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Err => ", err);
+                            res.json({ error: "You are not the author of this comment" });
+                        })
+                }
+
+            })
+    }
+});
+
+
 // Get Comments of a Post
-router.get("/", verifyToken, (req, res, next) => {
+router.get("/comments/", verifyToken, (req, res, next) => {
     const postId = req.query.id;
     CommentsModel.getCommentsByPost(postId)
         .then((comments) => {
