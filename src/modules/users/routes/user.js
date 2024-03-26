@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const { sequelize, DataTypes } = require('../database/server');
-const UserModel = require("../models/Users")(sequelize, DataTypes);
+const UserModel = require("../../../../models/Users")
 const bcrypt = require("bcrypt");
-const verifyToken = require('../middlewares/authMiddleware');
+const verifyToken = require("../../middlewares/authMiddleware");
 
 /* Find User by ID */
 router.get('/:id', (req, res, next) => {
@@ -18,7 +17,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 
-/* Get All Users */
+/* GET ALL USERS */
 router.get("/", (req, res) => {
     let usersLimit = req.query.limit;
     let usersOffset = req.query.offset;

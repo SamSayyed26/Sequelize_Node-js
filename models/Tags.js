@@ -1,23 +1,23 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../database/index");
 
-module.exports = (sequelize, Sequelize) => {
-    const Tag = sequelize.define('Tags', {
-        id: {
-            type: Sequelize.UUID,
-            defaultValue: Sequelize.UUIDV4,
-            allowNull: false,
-            primaryKey: true
-        },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-    });
+const Tag = sequelize.define('Tags', {
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+});
 
-    Tag.associate = (models) => {
-        Tag.belongsToMany(models.Posts, { foreignKey: 'tagId', through: 'postTags' });
-    };
-
-    Object.assign(Tag, require("../model_methods/model_methods.js"))
-    return Tag;
+Tag.associate = (models) => {
+    Tag.belongsToMany(models.Posts, { foreignKey: 'tagId', through: models.PostTags });
 }
+
+Object.assign(Tag, require("../src/modules/tags/services/tag"))
+module.exports = Tag;
+

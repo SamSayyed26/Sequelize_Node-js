@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const Sequelize = require("sequelize");
 require('dotenv').config();
 var clc = require("cli-color");
 
@@ -14,14 +14,14 @@ const dbUsername = process.env.DATABASE_USERNAME;
 const sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
     host: 'localhost',
     dialect: 'postgres',
+    logging: false
 });
-
 
 sequelize
     .authenticate()
     .then(() => {
         console.log(clc.green("\n****************"));
-        console.log(clc.green(`Connection with DB ${dbName} Established Successfully`));
+        console.log(clc.green(`Connection with DB ${dbName.toUpperCase()} Established Successfully`));
         console.log(clc.green("****************\n"));
     })
     .catch(err => {
@@ -32,18 +32,4 @@ sequelize
     });
 
 
-const db = require("../models");
-db.sequelize
-    .sync({ force: false })
-    .then(() => {
-        console.log(clc.green("****************"));
-        console.log(clc.green("Models created Successfully"));
-        console.log(clc.green("****************"));
-    })
-    .catch(err => {
-        console.log(clc.red("################"));
-        console.log(clc.red("Something went wrong while creating models => ", err));
-        console.log(clc.red("################"));
-    })
-
-module.exports = { sequelize, DataTypes };
+module.exports = sequelize;

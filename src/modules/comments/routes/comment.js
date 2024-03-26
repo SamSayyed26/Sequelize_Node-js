@@ -1,16 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const verifyToken = require("../middlewares/authMiddleware");
-const { sequelize, DataTypes } = require('../database/server');
-const CommentsModel = require("../models/Comments")(sequelize, DataTypes);
-const UsersModel = require("../models/Users")(sequelize, DataTypes);
-const PostsModel = require("../models/Posts")(sequelize, DataTypes);
+const verifyToken = require("../../middlewares/authMiddleware");
 
+const CommentsModel = require("../../../../models/Comments");
+const UsersModel = require("../../../../models/Users");
+const PostsModel = require("../../../../models/Posts");
+
+
+/* ------------------------- COMMENTS ------------------------- */
 
 /* ADD COMMENT */
 router.post("/comments/", verifyToken, (req, res, next) => {
     const commentObj = req.body;
     const postId = req.query.id;
+    console.log("POST ID ==> ", postId)
+    console.log("In here")
     if (res.locals.authenticatedUser) {
         const userID = res.locals.authenticatedUser;
         commentObj['userId'] = userID;
@@ -27,8 +31,8 @@ router.post("/comments/", verifyToken, (req, res, next) => {
     }
 });
 
-/* UPDATE COMMENT OF USER/CONSUMER */
-router.put("comments//:id", verifyToken, (req, res, next) => {
+/* UPDATE COMMENT */
+router.put("/comments/:id", verifyToken, (req, res, next) => {
     const commentObj = req.body;
     const commentId = req.params.id;
 
@@ -57,7 +61,7 @@ router.put("comments//:id", verifyToken, (req, res, next) => {
     }
 });
 
-/* DELETE COMMENT OF USER/CONSUMER */
+/* DELETE COMMENT */
 router.delete("/:postId/comments/:commentId", verifyToken, (req, res, next) => {
     const commentID = req.params.commentId;
     const postID = req.params.postId;
@@ -120,8 +124,7 @@ router.delete("/:postId/comments/:commentId", verifyToken, (req, res, next) => {
     }
 });
 
-
-// Get Comments of a Post
+/* GET COMMENTS OF A POST */
 router.get("/comments/", verifyToken, (req, res, next) => {
     const postId = req.query.id;
     CommentsModel.getCommentsByPost(postId)
@@ -132,6 +135,6 @@ router.get("/comments/", verifyToken, (req, res, next) => {
             console.error("Err => ", err);;
             res.json({ message: "Error while fetching the comments" })
         })
-})
+});
 
-module.exports = router;
+module.exports = router

@@ -1,41 +1,31 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../database/index");
 
-module.exports = (sequelize, Sequelize) => {
-
-    const Comment = sequelize.define("Comments", {
-        id: {
-            type: Sequelize.UUID,
-            defaultValue: Sequelize.UUIDV4,
-            primaryKey: true,
-            allowNull: false
-        },
-        userId: {
-            type: Sequelize.UUID,
-            allowNull: false,
-            // references: {
-            //     model: "Users",
-            //     key: 'id'
-            // }
-        },
-        postId: {
-            type: Sequelize.UUID,
-            allowNull: false,
-            // references: {
-            //     model: "Posts",
-            //     key: 'id'
-            // }
-        },
-        comment: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
-    });
-
-    Comment.associate = (models) => {
-        Comment.belongsTo(models.Posts, { foreignKey: 'postId' });
-        Comment.belongsTo(models.Users, { foreignKey: 'userId' });
+const Comment = sequelize.define("Comments", {
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false
+    },
+    userId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+    },
+    postId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+    },
+    comment: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
+});
 
-    Object.assign(Comment, require("../model_methods/model_methods"))
-    return Comment;
+Comment.associate = (models) => {
+    Comment.belongsTo(models.Posts, { foreignKey: 'postId' });
+    Comment.belongsTo(models.Users, { foreignKey: 'userId' });
 }
+
+Object.assign(Comment, require("../src/modules/comments/services/comment"))
+module.exports = Comment;

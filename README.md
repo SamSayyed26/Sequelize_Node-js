@@ -5,6 +5,13 @@
 - To run a seeder - npx sequelize-cli db:seed:all
 - To run seeder for a signle file - npx sequelize-cli db:seed --seed my_seeder_file.js
 
+## Migrations
+- To create a migration file - npx sequelize-cli migration:generate --name create-users
+- To run migration for all files - npx sequelize-cli db:migrate
+- To run migration for a single file - 
+- To undo the recent migration - npx sequelize-cli db:migrate:undo
+- To undo all migrations - npx sequelize-cli db:migrate:undo:all
+
 
 ## Create User
 {

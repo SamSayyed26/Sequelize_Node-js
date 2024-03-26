@@ -3,13 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var clc = require("cli-color");
 
-var index = require('./controllers/index');
-var signup = require('./controllers/signup');
-var users = require('./controllers/users');
-var login = require("./controllers/login");
-var posts = require("./controllers/posts");
-var comments = require("./controllers/comments");
+var routes = require('./routes/index');
 
 var app = express();
 
@@ -23,12 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/signup', signup);
-app.use('/login', login);
-app.use('/users', users);
-app.use('/posts', posts);
-// app.use('/comments', comments);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -45,5 +36,20 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const db = require("./models");
+db.sequelize
+  .sync({ force: false })
+  .then(() => {
+    // return db.sequelize.drop()
+    console.log(clc.green("****************"));
+    console.log(clc.green("Models created Successfully"));
+    console.log(clc.green("****************"));
+  })
+  .catch(err => {
+    console.log(clc.red("################"));
+    console.log(clc.red("Something went wrong while creating models => ", err));
+    console.log(clc.red("################"));
+  })
 
 module.exports = app;

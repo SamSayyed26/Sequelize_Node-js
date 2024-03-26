@@ -34,8 +34,7 @@ server.on('listening', onListening);
 /**
  * Connecting to Db
  */
-require("../database/server.js")
-// require("../models/index.js")
+require("../database/index.js")
 
 
 /**
