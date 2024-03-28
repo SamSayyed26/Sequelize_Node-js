@@ -18,10 +18,10 @@ const PostTags = sequelize.define('PostTags', {
     },
 });
 
-PostTags.associate = (models) => {
-    PostTags.belongsTo(models.Posts, { foreignKey: 'postId' });
-    PostTags.belongsTo(models.Tags, { foreignKey: 'tagId' });
-}
+// PostTags.associate = (models) => {
+//     PostTags.belongsTo(models.Posts, { foreignKey: 'postId' });
+//     PostTags.belongsTo(models.Tags, { foreignKey: 'tagId' });
+// }
 
 Object.assign(PostTags, require("../src/modules/postTags/services/postTag"))
 module.exports = PostTags;

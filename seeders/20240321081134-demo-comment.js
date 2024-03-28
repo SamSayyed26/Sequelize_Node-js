@@ -107,7 +107,17 @@ module.exports = {
         comment: "Cool. What is your name?",
         createdAt: "2024-03-25T07:34:20.264Z",
         updatedAt: "2024-03-25T07:34:20.264Z"
+      },
+      {
+        id: "b3ed1b35-10ff-4428-a39f-5224a667a84b",
+        userId: "b9835b25-ee5b-44e7-a635-7535988802b8",
+        postId: "a2e8ce0d-b6b8-448b-833a-b614d8313d02",
+        comment: "This user has same mutliple posts. Please delete all and keep one",
+        createdAt: "2024-03-27T07:07:08.653Z",
+        updatedAt: "2024-03-27T07:07:08.653Z"
       }
+
+
     ])
   },
 

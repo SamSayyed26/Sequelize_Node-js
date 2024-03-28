@@ -1,3 +1,5 @@
+const postTagsModel = require("../../../../models/PostTags")
+
 
 module.exports = {
     // Posts Methods
@@ -9,14 +11,18 @@ module.exports = {
         return posts;
     },
 
-    async uploadPost(postObj) {
+    async uploadPost(postObj, tags) {
         let post = await this.create(postObj);
 
-        // tags.forEach(element => {
-        //     console.log("TAGID: ", element.id)
-        //     post.addTag(element)
-        //     // element.addPosts(post);
-        // });
+        tags.forEach(element => {
+            console.log("TAGID: ", element.id)
+            console.log("Post ID: ", post.id)
+            postTagsModel.create({
+                tagId: element.id,
+                postId: post.id
+            })
+            // element.addPosts(post);
+        });
         return post;
     },
 

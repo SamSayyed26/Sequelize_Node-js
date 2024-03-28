@@ -1,3 +1,5 @@
+const CONSTANTS = require("../../../constants/constants");
+
 
 module.exports = {
 
@@ -45,7 +47,7 @@ module.exports = {
             where: {
                 id: id
             },
-            attributes: ['id', 'isContentCreator']
+            attributes: ['id', 'role']
         })
         return user;
     },
@@ -77,7 +79,7 @@ module.exports = {
 
     async changeIsContentCreator(userID) {
         const user = this.update({
-            isContentCreator: true
+            role: CONSTANTS.ROLES.CONTENT_CREATOR
         }, {
             where: {
                 id: userID

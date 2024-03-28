@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const UserModel = require("../../../../models/Users")
 const bcrypt = require("bcrypt");
-const verifyToken = require("../../middlewares/authMiddleware");
+const verifyToken = require("../../../middlewares/authMiddleware");
 
 /* Find User by ID */
 router.get('/:id', (req, res, next) => {
@@ -18,7 +18,7 @@ router.get('/:id', (req, res, next) => {
 
 
 /* GET ALL USERS */
-router.get("/", (req, res) => {
+router.get("/", verifyToken, (req, res) => {
     let usersLimit = req.query.limit;
     let usersOffset = req.query.offset;
     console.log("Limit: ", usersLimit, "Offset: ", usersOffset)

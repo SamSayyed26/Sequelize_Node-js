@@ -21,14 +21,14 @@ fs
     );
   })
   .forEach(file => {
-    console.log("Model", file)
+    // console.log("Model", file)
     const model = require(path.join(__dirname, file));
     db[model.name] = model;
   });
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
-    console.log("association", modelName)
+    // console.log("association", modelName)
     db[modelName].associate(db);
   }
 });

@@ -8,7 +8,7 @@
 ## Migrations
 - To create a migration file - npx sequelize-cli migration:generate --name create-users
 - To run migration for all files - npx sequelize-cli db:migrate
-- To run migration for a single file - 
+- To run migration for a single file -  npx sequelize-cli db:migrate --name 20240326072859-create-users.js
 - To undo the recent migration - npx sequelize-cli db:migrate:undo
 - To undo all migrations - npx sequelize-cli db:migrate:undo:all
 
@@ -76,8 +76,13 @@
     - DELETE /api/posts/:postId/comments/:commentId: Creator can delete comments of anyone on their posts. --- DONE
 
 ### Like/Dislike Routes:
-    - POST /api/posts/:postId/like: Like a post.
-    - POST /api/posts/:postId/dislike: Dislike a post.
+    - POST /api/posts/:postId/reaction/like: Like a post. --- DONE
+    - POST /api/posts/:postId/reaction/dislike: Remove Like --- DONE
+    - POST /api/posts/:postId/reaction/dislike: Dislike a post. --- DONE
+    - POST /api/posts/:postId/reaction/dislike: Remove Dislike --- DONE
+    - POST /api/posts/:postId/reaction/dislike 
+            OR
+           /api/posts/:postId/reaction/like: Update Reaction --- DONE
 
 ### File Upload Routes:
     - POST /api/upload/image: Upload an image file.

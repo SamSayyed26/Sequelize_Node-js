@@ -1,6 +1,10 @@
 const express = require("express");
-const router = express.Router();
-const verifyToken = require("../../middlewares/authMiddleware");
+const router = express.Router({ mergeParams: true });
+
+const verifyToken = require("../../../middlewares/authMiddleware");
+const { CommentSchema } = require("../schema/comment");
+const { validate } = require("../../../middlewares/validate");
+const CONSTANTS = require("../../../constants/constants");
 
 const CommentsModel = require("../../../../models/Comments");
 const UsersModel = require("../../../../models/Users");
@@ -10,12 +14,11 @@ const PostsModel = require("../../../../models/Posts");
 /* ------------------------- COMMENTS ------------------------- */
 
 /* ADD COMMENT */
-router.post("/comments/", verifyToken, (req, res, next) => {
+router.post("/", verifyToken, CommentSchema.createComment, validate, (req, res, next) => {
     const commentObj = req.body;
-    const postId = req.query.id;
-    console.log("POST ID ==> ", postId)
-    console.log("In here")
-    if (res.locals.authenticatedUser) {
+    const postId = req.params.postId;
+    console.log("POST ID ==> ", postId);
+    if (res.locals.authenticatedUser && postId) {
         const userID = res.locals.authenticatedUser;
         commentObj['userId'] = userID;
         commentObj['postId'] = postId;
@@ -24,17 +27,20 @@ router.post("/comments/", verifyToken, (req, res, next) => {
                 res.json({ message: "Comment uploaded successfully" })
             })
             .catch(err => {
-                console.error("Err=> ", err);
+                console.error("Err => ", err);
                 res.json({ messsgae: "Error while uploading the comment" })
             });
 
     }
+    else {
+        res.json({ message: `PostID cannot be ${postId}` })
+    }
 });
 
 /* UPDATE COMMENT */
-router.put("/comments/:id", verifyToken, (req, res, next) => {
+router.put("/:commentId", verifyToken, (req, res, next) => {
     const commentObj = req.body;
-    const commentId = req.params.id;
+    const commentId = req.params.commentId;
 
     if (res.locals.authenticatedUser) {
         const userID = res.locals.authenticatedUser;
@@ -62,7 +68,7 @@ router.put("/comments/:id", verifyToken, (req, res, next) => {
 });
 
 /* DELETE COMMENT */
-router.delete("/:postId/comments/:commentId", verifyToken, (req, res, next) => {
+router.delete("/:commentId", verifyToken, (req, res, next) => {
     const commentID = req.params.commentId;
     const postID = req.params.postId;
 
@@ -71,8 +77,8 @@ router.delete("/:postId/comments/:commentId", verifyToken, (req, res, next) => {
 
         UsersModel.getUserById(userID)
             .then(user => {
-                console.log("USer: ", user)
-                if (user.isContentCreator) {
+                if (user.role === CONSTANTS.ROLES.CONTENT_CREATOR) {
+                    console.log("USer: ", user)
                     PostsModel.getPostByID(postID, userID)
                         .then(post => {
                             if (post) {
@@ -125,7 +131,7 @@ router.delete("/:postId/comments/:commentId", verifyToken, (req, res, next) => {
 });
 
 /* GET COMMENTS OF A POST */
-router.get("/comments/", verifyToken, (req, res, next) => {
+router.get("/", verifyToken, (req, res, next) => {
     const postId = req.query.id;
     CommentsModel.getCommentsByPost(postId)
         .then((comments) => {

@@ -93,7 +93,18 @@ module.exports = {
         date: "2024-03-20",
         createdAt: "2024-03-25T07:40:58.521Z",
         updatedAt: "2024-03-25T07:40:58.521Z"
+      },
+      {
+        id: "a2e8ce0d-b6b8-448b-833a-b614d8313d02",
+        userId: "b9835b25-ee5b-44e7-a635-7535988802b8",
+        title: "How to work with AWS bucket",
+        content: "Delete all buckets",
+        category: "Blog",
+        date: "2024-03-20",
+        createdAt: "2024-03-27T06:12:36.207Z",
+        updatedAt: "2024-03-27T06:12:36.207Z"
       }
+
     ])
   },
 

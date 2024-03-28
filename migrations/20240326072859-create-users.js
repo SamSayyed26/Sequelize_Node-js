@@ -1,6 +1,6 @@
 'use strict';
 
-// const userService = require('../src/modules/users/services/user.service');
+const bcrypt = require("bcrypt");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -28,8 +28,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      isContentCreator: {
-        type: Sequelize.BOOLEAN,
+      role: {
+        type: Sequelize.STRING,
         allowNull: false
       },
       createdAt: {
@@ -43,8 +43,18 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         onUpdate: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
+    }, {
+      hooks: {
+        async beforeCreate(user, options) {
+          user.password = await bcrypt.hash(user.password, 10);
+        },
+        async beforeUpdate(user, options) {
+          if (user.changed("password")) {
+            user.password = await bcrypt.hash(user.password, 10)
+          }
+        }
+      }
     });
-    // Object.assign(userService, { queryInterface: Sequelize })
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Users');

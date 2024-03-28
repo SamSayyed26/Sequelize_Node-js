@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-var app = express();
-const verifyToken = require("../../middlewares/authMiddleware");
-const comments = require("../../comments/routes/comment")
+
+const verifyToken = require("../../../middlewares/authMiddleware");
+const { postSchema } = require("../schema/post");
+const { validate } = require("../../../middlewares/validate");
+
 const UsersModel = require("../../../../models/Users");
 const PostsModel = require("../../../../models/Posts");
 const TagsModel = require("../../../../models/Tags");
@@ -24,7 +26,7 @@ router.get("/", verifyToken, (req, res, next) => {
 });
 
 /* ADD POST */
-router.post("/", verifyToken, (req, res, next) => {
+router.post("/", verifyToken, postSchema.createPost, validate, (req, res, next) => {
     const postObj = req.body;
     if (res.locals.authenticatedUser) {
         const userID = res.locals.authenticatedUser;
@@ -33,7 +35,7 @@ router.post("/", verifyToken, (req, res, next) => {
                 postObj['userId'] = userID;
                 TagsModel.createTags(postObj.tags)
                     .then((tags) => {
-                        PostsModel.uploadPost(postObj)
+                        PostsModel.uploadPost(postObj, tags)
                             .then(post => {
                                 res.json({ message: "Post uploaded successfully" });
                             })
@@ -111,10 +113,6 @@ router.get("/:id", verifyToken, (req, res, next) => {
             res.json({ message: "Error while fetching the posts" })
         })
 });
-
-
-/* ------------------------- COMMENTS ------------------------- */
-app.use('/:postId/comments', comments);
 
 
 module.exports = router

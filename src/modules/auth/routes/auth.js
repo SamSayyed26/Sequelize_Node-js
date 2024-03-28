@@ -1,14 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const UsersModel = require("../../../../models/Users");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const userSchema = require("../../users/schema/user");
+const { validate } = require("../../../middlewares/validate");
+const CONSTANTS = require("../../../constants/constants");
 
 require('dotenv').config();
 const JWT_SECRET_KEY = process.env.SECRET_KEY;
 
 /* SIGNUP */
-router.post('/signup', async function (req, res, next) {
+router.post('/signup', userSchema.createUser, validate, async function (req, res, next) {
     const userObj = req.body;
 
     UsersModel.checkUnique(userObj.email)
@@ -18,24 +21,24 @@ router.post('/signup', async function (req, res, next) {
             }
             else {
                 // Hashing Password
-                bcrypt.hash(userObj.password, 10)
-                    .then(pass => {
-                        userObj.password = pass;
-                        userObj['isContentCreator'] = false
-                        // Adding User
-                        UsersModel.addUser(userObj)
-                            .then((user) => {
-                                res.json({ data: user.firstName + ' ' + user.lastName, message: `User successfully created` });
-                            })
-                            .catch(err => {
-                                console.error(err)
-                                res.send(err)
-                            })
+                // bcrypt.hash(userObj.password, 10)
+                //     .then(pass => {
+                //         userObj.password = pass;
+                userObj['role'] = CONSTANTS.ROLES.VIEWER;
+                // Adding User
+                UsersModel.addUser(userObj)
+                    .then((user) => {
+                        res.json({ data: user.firstName + ' ' + user.lastName, message: `User successfully created` });
                     })
                     .catch(err => {
-                        console.log("Error while hashing the password =>", err);
-                        res.json({ error: "Something went wrong while creating the user" })
-                    });
+                        console.error(err)
+                        res.send(err)
+                    })
+                // })
+                // .catch(err => {
+                //     console.log("Error while hashing the password =>", err);
+                //     res.json({ error: "Something went wrong while creating the user" })
+                // });
             }
         })
         .catch(err => {
@@ -65,9 +68,5 @@ router.get('/login', (req, res, next) => {
             res.json({ message: "User Not Found" })
         })
 });
-
-router.get("/", (req, res) => {
-    res.json({ message: "Hello Auth World" })
-})
 
 module.exports = router;
